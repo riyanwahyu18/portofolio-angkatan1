@@ -1,0 +1,62 @@
+.namalengkap {
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  width: 500px;
+}
+.namalengkap img {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* .navbar{
+  margin: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar a{
+  margin-left: 25px;
+  margin-right: 25px;
+  text-decoration: none;
+  
+} */
+
+.container {
+  border: 1px;
+}
+
+.contact{
+  margin-left: 80px;
+}
+.overview {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.overview {
+  align-items: center;
+}
+.countaniner-fuild {
+  text-decoration: none;
+}
+
+footer {
+  position: fixed;
+  color: aliceblue;
+  background-color: rgb(0, 1, 22);
+  text-align: center;
+  padding-top: 10px;
+  bottom: 0;
+  width: 100%;
+  font-size: 13px;
+}
