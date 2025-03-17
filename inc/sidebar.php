@@ -114,10 +114,10 @@
             </a>
           </li>
         </ul> -->
-      </li>
+      <!-- </li> -->
       <!-- End Forms Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -133,9 +133,10 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Tables Nav -->
+      </li> -->
+      <!-- End Tables Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -156,9 +157,10 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Charts Nav -->
+      </li> -->
+      <!-- End Charts Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -179,7 +181,8 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Icons Nav -->
+      </li> -->
+      <!-- End Icons Nav -->
 
       <li class="nav-heading">Pages</li>
 
@@ -206,6 +209,13 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="project.php">
+          <i class="bi bi-archive"></i>
+          <span>Project</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link collapsed" href="contact.php">
           <i class="bi bi-person-badge"></i>
           <span>Contact</span>
@@ -216,6 +226,13 @@
         <a class="nav-link collapsed" href="skill.php">
           <i class="bi bi bi-laptop"></i>
           <span>Skill</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="blog.php">
+          <i class="bi bi-newspaper"></i>
+          <span>Blog</span>
         </a>
       </li>
       

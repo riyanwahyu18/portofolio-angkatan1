@@ -14,7 +14,6 @@ if (isset($_POST['kirim'])) {
 		header ("location:porto.php");
 		die;
 	} else {
-
 		$insert = mysqli_query($conn, "INSERT INTO contact (nama, email, subjek, pesan) VALUES ('$nama', '$email', '$subject', '$pesan')");
 		if ($insert) {
 			header("location:porto.php?#contact-section&contact=berhasil");
@@ -32,6 +31,11 @@ $rowAbout = mysqli_fetch_assoc($selectAbout);
 $selectSkill = mysqli_query($conn, "SELECT * FROM skill");
 $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil data per row
 
+$projects = mysqli_query($conn, "SELECT * FROM project ORDER BY id DESC");
+$projects = mysqli_fetch_all($projects, MYSQLI_ASSOC);
+
+$queryBlog = mysqli_query($conn, "SELECT * FROM blog WHERE BY id DESC");
+$blogs =  mysqli_fetch_all($queryBlog, MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +88,8 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
             </div>
         </div>
     </nav>
+
+    <!-- Home -->
     <section id="home-section" class="hero">
         <div class="home-slider  owl-carousel">
             <div class="slider-item ">
@@ -125,6 +131,7 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
         </div>
     </section>
 
+    <!--About -->
     <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
         <div class="container">
             <div class="row d-flex">
@@ -197,10 +204,10 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
                     <p><a href="#" class="btn btn-primary py-4 px-5">Download CV</a></p>
                 </div>
             </div>
-
         </div>
     </section>
 
+    <!-- Service -->
     <section class="ftco-section" id="services-section">
         <div class="container">
             <div class="row justify-content-center py-5 mt-5">
@@ -276,126 +283,89 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
         </div>
     </section>
 
-
+    <!-- Skill -->
     <section class="ftco-section" id="skills-section">
-        <div class="container">
-            <div class="row justify-content-center pb-5">
+			<div class="container">
+				<div class="row justify-content-center pb-5">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+          	<h1 class="big big-2">Skills</h1>
+            <h2 class="mb-4">My Skills</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+          </div>
+        </div>
+				<div class="row">
+					<?php 
+					foreach ($rowSkills as $row) {
+					?>
+					<div class="col-md-6 animate-box">
+						<div class="progress-wrap ftco-animate">
+							<h3><?= $row['nama_skill'] ?></h3>
+							<div class="progress">
+                                <div class="progress-bar color-1" role="progressbar" aria-valuenow="90"
+                                aria-valuemin="0" aria-valuemax="100" style="width:<?= $row['persentase'] ?>%">
+                                <span><?= $row['persentase'] ?>%</span>
+                                </div>
+							</div>
+						</div>
+					</div>
+					<?php }?>
+					
+				</div>
+			</div>
+	</section>
+
+    <!-- Project  -->
+    <section class="ftco-section ftco-project" id="projects-section">
+    	<div class="container">
+    		<div class="row justify-content-center pb-5">
                 <div class="col-md-12 heading-section text-center ftco-animate">
-                    <h1 class="big big-2">Skills</h1>
-                    <h2 class="mb-4">My Skills</h2>
+                    <h1 class="big big-2">Projek</h1>
+                    <h2 class="mb-4">Projek Kami</h2>
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
                 </div>
             </div>
-            <div class="row">
-				<?php
-				foreach ($rowSkills as $row) { //perulangannnn
-				?>
-				
-                <div class="col-md-6 animate-box">
-                    <div class="progress-wrap ftco-animate">
-                        <h3><?= $row['nama_skill'] ?></h3>
-                        <div class="progress">
-                            <div class="progress-bar color-1" role="progressbar" aria-valuenow="90"
-                                aria-valuemin="0" aria-valuemax="100" style="width:<?= $row['persentase'] ?>%">
-                                <span><?= $row['persentase'] ?>%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-				<?php
-				}
-				?>
-                
-                <!--  -->
-
-                    <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-6.jpg);">
-                        <div class="overlay"></div>
-                        <div class="text text-center p-4">
-                            <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-                            <span>Web Design</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-2.jpg);">
+    		<div class="row">
+                <?php 
+                    $colClass =["col-md-4", "col-md-8"];
+                    $index = 0;
+                ?>
+                <?php foreach ($projects as $index => $project) { ?>
+                    <?php $col = $colClass[$index % 2]; ?>
+                        <div class="<?php echo $col ?> mb-3">
+                            <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(<?php echo "assets/uploads/" . $project['foto']?>);">
                                 <div class="overlay"></div>
                                 <div class="text text-center p-4">
-                                    <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-                                    <span>Web Design</span>
+                                    <h3><a href="#"><?php echo $project['nama'] ?></a></h3>
+                                    <span><?php echo $project['kategori'] ?></span>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="project img ftco-animate d-flex justify-content-center align-items-center" style="background-image: url(images/project-3.jpg);">
-                                <div class="overlay"></div>
-                                <div class="text text-center p-4">
-                                    <h3><a href="#">Branding &amp; Illustration Design</a></h3>
-                                    <span>Web Design</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                <?php } ?>
+    		</div>
+    	</div>
+    </section>
 
-
+    <!-- Blog -->
     <section class="ftco-section" id="blog-section">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-7 heading-section text-center ftco-animate">
                     <h1 class="big big-2">Blog</h1>
-                    <h2 class="mb-4">Our Blog</h2>
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia</p>
+                    <h2 class="mb-4">Blog Kami</h2>
+                    <p>Silahkan membaca Blog Saya jangan lupa like komen dan sibscribe</p>
                 </div>
             </div>
             <div class="row d-flex">
+                <?php foreach ($blogs as blog) : ?>
                 <div class="col-md-4 d-flex ftco-animate">
                     <div class="blog-entry justify-content-end">
-                        <a href="single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
+                        <a href="single.html" class="block-20" style="background-image: url('asset/uploads/<?php echo $blog['foto'] ?>;">
                         </a>
                         <div class="text mt-3 float-right d-block">
                             <div class="d-flex align-items-center mb-3 meta">
                                 <p class="mb-0">
                                     <span class="mr-2">June 21, 2019</span>
-                                    <a href="#" class="mr-2">Admin</a>
-                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                                </p>
-                            </div>
-                            <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry justify-content-end">
-                        <a href="single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-                        </a>
-                        <div class="text mt-3 float-right d-block">
-                            <div class="d-flex align-items-center mb-3 meta">
-                                <p class="mb-0">
-                                    <span class="mr-2">June 21, 2019</span>
-                                    <a href="#" class="mr-2">Admin</a>
-                                    <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
-                                </p>
-                            </div>
-                            <h3 class="heading"><a href="single.html">Why Lead Generation is Key for Business Growth</a></h3>
-                            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex ftco-animate">
-                    <div class="blog-entry">
-                        <a href="single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-                        </a>
-                        <div class="text mt-3 float-right d-block">
-                            <div class="d-flex align-items-center mb-3 meta">
-                                <p class="mb-0">
-                                    <span class="mr-2">June 21, 2019</span>
-                                    <a href="#" class="mr-2">Admin</a>
+                                    <a href="#" class="mr-2"><?php echo $blog['penulis'] ?></a>
                                     <a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a>
                                 </p>
                             </div>
@@ -407,6 +377,7 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
             </div>
         </div>
     </section>
+
 
     <section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
         <div class="container">
@@ -447,6 +418,7 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
         </div>
     </section>
 
+
     <section class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
         <div class="container">
             <div class="row justify-content-center">
@@ -458,6 +430,7 @@ $rowSkills = mysqli_fetch_all($selectSkill, MYSQLI_ASSOC); // untuk memanggil da
             </div>
         </div>
     </section>
+
 
     <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
         <div class="container">
